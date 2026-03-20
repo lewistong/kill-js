@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kill JS</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 13px;
+      background: #1e1e2e;
+      color: #cdd6f4;
+      width: 220px;
+    }
+
+    .heading {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #f38ba8;
+      padding: 10px 12px 6px;
+    }
+
+    button {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      width: 100%;
+      padding: 9px 12px;
+      background: none;
+      border: none;
+      border-top: 1px solid #313244;
+      color: #cdd6f4;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    button:hover { background: #313244; }
+
+    .btn-title { font-weight: 500; }
+
+    .btn-sub {
+      font-size: 11px;
+      color: #6c7086;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 196px;
+    }
+
+    #error {
+      color: #f38ba8;
+      font-size: 12px;
+      padding: 10px 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="heading">JS is off — re-enable?</div>
+  <div id="content"><div id="error">Loading…</div></div>
+  <script src="popup.js"></script>
+</body>
+</html>
