@@ -13,25 +13,14 @@ async function init() {
     return;
   }
 
-  const { hostname, pathname } = new URL(tab.url);
-  const pageUrl = tab.url;
+  const { hostname } = new URL(tab.url);
 
   content.innerHTML = `
-    <button id="btn-page">
-      <span class="btn-title">This page only</span>
-      <span class="btn-sub">${pathname || "/"}</span>
-    </button>
     <button id="btn-domain">
-      <span class="btn-title">Entire domain</span>
+      <span class="btn-title">Re-enable for this domain</span>
       <span class="btn-sub">${hostname}</span>
     </button>
   `;
-
-  document.getElementById("btn-page").addEventListener("click", async () => {
-    await enable(pageUrl);
-    chrome.tabs.reload(tab.id);
-    window.close();
-  });
 
   document.getElementById("btn-domain").addEventListener("click", async () => {
     await Promise.all([
