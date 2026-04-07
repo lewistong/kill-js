@@ -20,6 +20,10 @@ async function init() {
       <span class="btn-title">Re-enable for this domain</span>
       <span class="btn-sub">${hostname}</span>
     </button>
+    <button id="btn-tab">
+      <span class="btn-title">Enable for this tab</span>
+      <span class="btn-sub">Re-blocks when tab closes</span>
+    </button>
   `;
 
   document.getElementById("btn-domain").addEventListener("click", async () => {
@@ -27,6 +31,23 @@ async function init() {
       enable(`https://${hostname}/*`),
       enable(`http://${hostname}/*`),
     ]);
+    chrome.tabs.reload(tab.id);
+    window.close();
+  });
+
+  document.getElementById("btn-tab").addEventListener("click", async () => {
+    await Promise.all([
+      enable(`https://${hostname}/*`),
+      enable(`http://${hostname}/*`),
+    ]);
+
+    const { sessionAllowed = {} } = await chrome.storage.session.get("sessionAllowed");
+    if (!sessionAllowed[hostname]) sessionAllowed[hostname] = [];
+    if (!sessionAllowed[hostname].includes(tab.id)) {
+      sessionAllowed[hostname].push(tab.id);
+    }
+    await chrome.storage.session.set({ sessionAllowed });
+
     chrome.tabs.reload(tab.id);
     window.close();
   });
